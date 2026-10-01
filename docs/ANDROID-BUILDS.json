@@ -1,0 +1,14 @@
+{
+  "PSERA-debug.apk": {
+    "bytes": 153899405,
+    "sha256": "6b144d2f2770db98945f00d749c461b26d6be7cfd2a3d4b712d8d1813d2acfd1"
+  },
+  "PSERA-demo.apk": {
+    "bytes": 53457053,
+    "sha256": "6a6cb4320b08e3474c86d7c28152e070cf23c7339f141010f88fbca5a7131baf"
+  },
+  "PSERA-test.aab": {
+    "bytes": 52372319,
+    "sha256": "211ba93e0fbac91439a55f6adbd07e4abc9210fb99e254e534472e75903f7669"
+  }
+}

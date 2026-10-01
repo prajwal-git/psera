@@ -1,0 +1,27 @@
+PSERA IPHONE PROJECT
+
+This ZIP contains source code, not an installable iPhone app.
+An IPA has NOT been compiled or signed in this Linux workspace.
+
+FROM WINDOWS:
+See docs/WINDOWS-FREE-IPHONE.md. Upload the project contents to a private
+GitHub repository and run the included codemagic.yaml workflow on Codemagic.
+It compiles and packages PSERA-unsigned.ipa for signing through AltStore.
+The cloud workflow has not yet been executed here.
+
+ON A MAC:
+1. Install Flutter 3.47.5 and full Xcode with iOS platform support.
+2. Open Terminal in this psera folder.
+3. Run: bash scripts/ios.sh prepare
+4. In Xcode: Runner > Signing & Capabilities > choose your Apple Team.
+5. Choose your simulator or connected iPhone and Run.
+
+FOR TESTFLIGHT:
+Configure your Apple Developer account and App Store Connect app record,
+then run: bash scripts/ios.sh ipa
+Upload/distribute the signed build through Xcode and TestFlight.
+
+See docs/IPHONE.md for full instructions.
+
+This version has sample products and local demo checkout.
+No real payment is collected and no live order is sent to PSERA.

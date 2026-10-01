@@ -1,0 +1,47 @@
+# Commit this file beside pubspec.yaml at the ROOT of the GitHub repository.
+# Personal testing only: the output needs signing through AltStore before use.
+workflows:
+  psera-ios-unsigned:
+    name: PSERA iPhone - unsigned IPA for AltStore
+    instance_type: mac_mini_m2
+    max_build_duration: 90
+    environment:
+      flutter: "3.47.5"
+      xcode: latest
+    scripts:
+      - name: Check project and toolchain
+        script: |
+          set -euo pipefail
+          cd "$CM_BUILD_DIR"
+          test -f pubspec.yaml || { echo "Upload the CONTENTS of the psera folder to the repository root."; exit 1; }
+          test -f ios/Runner.xcodeproj/project.pbxproj
+          flutter --version
+          xcodebuild -version
+      - name: Install Flutter dependencies
+        script: |
+          set -euo pipefail
+          cd "$CM_BUILD_DIR"
+          flutter pub get
+      - name: Analyze and test PSERA
+        script: |
+          set -euo pipefail
+          cd "$CM_BUILD_DIR"
+          flutter analyze --no-pub
+          flutter test --no-pub --reporter expanded
+      - name: Compile release app for a physical iPhone
+        script: |
+          set -euo pipefail
+          cd "$CM_BUILD_DIR"
+          flutter build ios --release --no-codesign
+      - name: Package and verify unsigned IPA
+        script: |
+          set -euo pipefail
+          cd "$CM_BUILD_DIR"
+          bash scripts/package_unsigned_ipa.sh
+    artifacts:
+      - build/ios/unsigned/PSERA-unsigned.ipa
+      - build/ios/unsigned/PSERA-unsigned.ipa.sha256
+      - build/ios/unsigned/BUILD-INFO.txt
+      - /tmp/xcodebuild_logs/*.log
+
+# No publishing, Apple account secrets or automatic build triggers are configured.
